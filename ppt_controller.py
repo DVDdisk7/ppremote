@@ -95,6 +95,11 @@ class PPTController:
                 pres_name = pres.Name
                 is_blank = (view.State == 3 or view.State == 4)
                 
+                # PowerPoint can sometimes return 0 for CurrentShowPosition during rapid transitions.
+                # If this happens, we return the last known valid state to avoid UI glitches.
+                if current_idx <= 0 and self.last_state and self.last_pres_name == pres_name:
+                    return self.last_state
+                
                 state["current_slide"] = current_idx
                 state["total_slides"] = pres.Slides.Count
                 state["is_blank"] = is_blank
