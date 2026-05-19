@@ -45,8 +45,6 @@ def send_command(cmd: Command):
         ppt.stop_show()
     elif cmd.action == "blank":
         ppt.toggle_blank()
-    elif cmd.action == "pointer":
-        ppt.toggle_pointer()
     elif cmd.action == "goto" and cmd.index is not None:
         ppt.goto_slide(cmd.index)
     return {"status": "ok"}

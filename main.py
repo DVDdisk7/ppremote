@@ -5,8 +5,6 @@ import qrcode
 from PIL import Image, ImageDraw
 import os
 import sys
-import os
-import sys
 import queue
 
 from web_server import run_server, stop_server
@@ -26,6 +24,11 @@ class App(ctk.CTk):
         super().__init__()
 
         self.title("PowerPoint Remote Host")
+        
+        icon_path = os.path.join(getattr(sys, '_MEIPASS', os.path.dirname(__file__)), 'icon.ico')
+        if os.path.exists(icon_path):
+            self.iconbitmap(icon_path)
+            
         self.geometry("500x200")
         self.resizable(False, False)
         
@@ -195,7 +198,7 @@ class App(ctk.CTk):
         os._exit(0) # Forcefully kill any remaining daemon threads like uvicorn
 
 if __name__ == "__main__":
-    ctk.set_appearance_mode("dark")
+    ctk.set_appearance_mode("system")
     ctk.set_default_color_theme("blue")
     app = App()
     app.mainloop()
